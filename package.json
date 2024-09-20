@@ -1,0 +1,24 @@
+{
+  "name": "ci-cd_learning-",
+  "version": "1.0.0",
+  "description": "A simple Node.js app using Express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fumnanya92/CI-CD_Learning-.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "web"
+  ],
+  "author": "fumnanya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fumnanya92/CI-CD_Learning-/issues"
+  },
+  "homepage": "https://github.com/Fumnanya92/CI-CD_Learning-#readme"
+}
