@@ -2,25 +2,35 @@ name: Node.js CI
 on:
   push:
     branches: [main]
-  # on: [push, workflow_dispatch, ...]  # Multiple workflow triggers can be added here
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.17.0]  # Testing against multiple Node.js versions
+        node-version: [20.17.0]  # Specify the Node.js version to use
     steps:
       - name: Get code
-        uses: actions/checkout@v4  # Predefined action to check out code from the repository
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4  # Predefined action to set up Node.js
+        uses: actions/checkout@v4  # Check out the code from the repository
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4  # Set up Node.js environment
         with:
-          node-version: ${{ matrix.node-version }}  # Matrix variable for Node.js version
-      - name: Install or update npm
-        run: npm install -g npm  # Installs or updates npm globally
-  #    - name: Install dependencies
- #       run: npm ci  # Running shell command to install dependencies
+          node-version: ${{ matrix.node-version }}  # Use the specified Node.js version
+
+      - name: Install npm
+        run: npm install -g npm  # Install the latest npm globally
+
+      - name: Install dependencies
+        run: npm install  # Install project dependencies
+
       - name: Build project (if present)
-        run: npm run build --if-present  # Running shell command to build the project if build script exists
-      - name: Test application
-        run: npm test  # Running shell command to run tests
+        run: npm run build --if-present  # Build the project only if a build script is present
+
+      # Skip the test step if no tests are present
+      - name: Skip test if not available
+        run: |
+          if [ -f package.json ] && grep -q '"test":' package.json; then
+            npm test;
+          else
+            echo "No test script found, skipping tests.";
+          fi
