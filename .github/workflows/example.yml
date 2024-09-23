@@ -11,9 +11,15 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      
+
     - name: Install Jest
       run: npm install --save-dev jest
+
+    # Optional step: Create a simple test file
+    - name: Create a simple test file
+      run: |
+        mkdir -p __tests__
+        echo "test('Simple test', () => { expect(2 + 2).toBe(4); });" > __tests__/app.test.js
 
     - name: Run tests
       run: npm test

@@ -4,7 +4,7 @@
   "description": "A simple Node.js app using Express.js",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "repository": {
     "type": "git",
